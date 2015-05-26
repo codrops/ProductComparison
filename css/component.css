@@ -1,0 +1,625 @@
+.view {
+	-webkit-transition: -webkit-transform 0.4s ease-in-out;
+	transition: transform 0.4s ease-in-out;
+}
+
+.view--compare {
+	-webkit-transform: scale3d(0.9,0.9,1);
+	transform: scale3d(0.9,0.9,1);
+}
+
+/* product grid */
+.grid {
+	margin: 0 auto;
+	padding: 4em 1em;
+	max-width: 1200px;
+	text-align: center;
+	overflow: hidden;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* if flexbox is supported, let's use it to lay out the products */
+.flexbox .grid {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-align-content: stretch;
+	-ms-flex-line-pack: stretch;
+	align-content: stretch;
+	-webkit-align-items: flex-start;
+	-ms-flex-align: start;
+	align-items: flex-start;
+}
+
+/* product */
+.product {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	min-width: 16em;
+	margin: 0 1em 2.5em;
+	padding: 1.5em 1.5em 2em;
+	background: #24252A;
+	border-radius: 5px;
+}
+
+.product--selected {
+	box-shadow: 0 0 0 2px #5C5EDC;
+}
+
+.flexbox .product {
+	display: block;
+	-webkit-flex: 0 0 16em;
+	-ms-flex: 0 0 16em;
+	flex: 0 0 16em;
+}
+
+/* product info */
+.product__info > span {
+	display: block;
+	padding: 1em 0;
+}
+
+/* since we'll be using the product info inside of the comparison, we'll hide the extra info for the grid view */
+.grid .extra {
+	display: none;
+}
+
+.product__image {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	-webkit-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+}
+
+.product:hover .product__image {
+	-webkit-animation: swing 0.6s forwards;	
+	animation: swing 0.6s forwards;	
+}
+
+/* https://daneden.github.io/animate.css/ */
+@-webkit-keyframes swing {
+	25% {
+		-webkit-transform: rotate3d(0, 0, 1, 6deg);
+		transform: rotate3d(0, 0, 1, 6deg);
+	}
+
+	50% {
+		-webkit-transform: rotate3d(0, 0, 1, -4deg);
+		transform: rotate3d(0, 0, 1, -4deg);
+	}
+
+	75% {
+		-webkit-transform: rotate3d(0, 0, 1, 2deg);
+		transform: rotate3d(0, 0, 1, 2deg);
+	}
+
+	100% {
+		-webkit-transform: rotate3d(0, 0, 1, 0deg);
+		transform: rotate3d(0, 0, 1, 0deg);
+	}
+}
+
+@keyframes swing {
+  25% {
+		-webkit-transform: rotate3d(0, 0, 1, 6deg);
+		transform: rotate3d(0, 0, 1, 6deg);
+	}
+
+	50% {
+		-webkit-transform: rotate3d(0, 0, 1, -4deg);
+		transform: rotate3d(0, 0, 1, -4deg);
+	}
+
+	75% {
+		-webkit-transform: rotate3d(0, 0, 1, 2deg);
+		transform: rotate3d(0, 0, 1, 2deg);
+	}
+
+	100% {
+		-webkit-transform: rotate3d(0, 0, 1, 0deg);
+		transform: rotate3d(0, 0, 1, 0deg);
+	}
+}
+
+.product__title {
+	font-size: 150%;
+	margin: 1em 0 0;
+	min-height: 3em;
+}
+
+.product__price {
+	font-weight: bold;
+	color: #797BED;
+}
+
+.action {
+	display: inline-block;
+	font-size: 1em;
+	white-space: nowrap;
+	padding: 0.85em 1.25em;
+	cursor: pointer;
+	border: none;
+	background: transparent;
+	text-align: center;
+}
+
+.action:focus {
+	outline: none;
+}
+
+.action--button {
+	background: #2C2D34;
+	color: #fff;
+	border-radius: 2px;
+	-webkit-transition: background 0.2s;
+	transition: background 0.2s;
+}
+
+.action--button:hover {
+	background: #5C5EDC;
+}
+
+.action__text {
+	font-family: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: .813em;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.action__text--invisible {
+	position: absolute;
+	top: 100%;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.action--button i + span {
+	margin-left: 1em;
+}
+
+.flexbox .action--buy {
+	-webkit-align-self: center;
+	-ms-flex-item-align: center;
+	align-self: center;
+	margin-top: 1em;
+	-webkit-flex: none;
+	-ms-flex: none;
+	flex: none;
+}
+
+.action--close {
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	right: 0;
+	font-size: 1.5em;
+	color: #ddd;
+	pointer-events: none;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s, background 0.2s;
+	transition: opacity 0.3s, background 0.2s;
+}
+
+.view--compare + .compare .action--close {
+	pointer-events: auto;
+	opacity: 1;
+	-webkit-transition-delay: 0.4s, 0s;
+	transition-delay: 0.4s, 0s;
+}
+
+.action--close:hover,
+.action--close:focus {
+	color: #797BED;
+}
+
+.action--compare {
+	margin: 0 0 0 4px;
+	opacity: 0;
+	pointer-events: none;
+	cursor: default;
+	background-color: #34363D;
+	color: #565B6C;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.compare-basket--active .action--compare {
+	opacity: 1;
+}
+
+.compare-basket--active .action--compare:nth-child(3),
+.compare-basket--active .action--compare:nth-child(4) {
+	background-color: #494BC7;
+	color: #fff;
+	pointer-events: auto;
+	cursor: pointer;
+}
+
+.action--remove {
+	position: absolute;
+	overflow: hidden;
+	color: #ddd;
+	top: 0px;
+	right: 2px;
+	padding: 0;
+	font-size: 0.65em;
+}
+
+.action--compare-add {
+	color: #ddd;
+	position: absolute;
+	top: 10px;
+	right: 5px;
+}
+
+.action--compare-add:hover .action__text--invisible {
+	opacity: 1;
+	top: 35px;
+	right: 10px;
+	color: #ddd;
+	font-size: 75%;
+	letter-spacing: 0;
+	background: #2F3035;
+	border-radius: 2px;
+	padding: 3px 5px;
+}
+
+.action--remove:hover,
+.action--compare-add:hover {
+	color: #5C5EDC;
+}
+
+.action--compare-add .fa-check,
+.action--compare-add input[type=checkbox]:checked ~ .fa-plus {
+	display: none;
+}
+
+.action--compare-add input[type=checkbox]:checked ~ .fa-check {
+	display: block;
+	color: #5C5EDC;
+}
+
+.check-hidden {
+	position: absolute;
+	opacity: 0;
+}
+
+.compare-basket {
+	width: 100%;
+	padding: 0.75em;
+	text-align: right;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: #212227;
+	z-index: 1000;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-transform: translate3d(0,-100%,0);
+	transform: translate3d(0,-100%,0);
+	-webkit-transition: -webkit-transform 0.3s cubic-bezier(0.2,1,0.3,1);
+	transition: transform 0.3s cubic-bezier(0.2,1,0.3,1);
+}
+
+.compare-basket--active {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.flexbox .compare-basket {
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	-webkit-justify-content: flex-end;
+	-ms-flex-pack: end;
+	justify-content: flex-end;
+}
+
+.product-icon {
+	display: inline-block;
+	vertical-align: middle;
+	background: #42444F;
+	width: 50px;
+	height: 50px;
+	padding: 5px;
+	margin: 0 3px;
+	border-radius: 2px;
+	position: relative;
+}
+
+.product-icon::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	border-radius: 4px;
+	z-index: -1;
+	box-shadow: -56px 0 #2C2D34;
+}
+
+.compare-basket--full .product-icon::after {
+	display: none;
+}
+
+.flexbox .product-icon {
+	display: block;
+}
+
+/* comparison overlay */
+.compare {
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+	height: 0;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	z-index: 1001;
+	-webkit-transition: height 0s 0.4s;
+	transition: height 0s 0.4s;
+}
+
+.flexbox .compare {
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+}
+
+.view--compare + .compare {
+	pointer-events: auto;
+	height: 100%;
+	-webkit-transition: none;
+	transition: none;
+}
+
+.compare::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);
+	opacity: 0;
+	-webkit-transition: opacity 0.4s;
+	transition: opacity 0.4s;
+}
+
+.view--compare + .compare::before {
+	opacity: 1;
+}
+
+.compare__item {
+	height: 100%;
+	width: 50%;
+	background: #24252A;
+	text-align: center;
+	cursor: default;
+	padding: 2em 0;
+	-webkit-transition: -webkit-transform 0.4s ease-in-out;
+	transition: transform 0.4s ease-in-out;
+}
+
+.no-flexbox .compare__item {
+	display: inline-block;
+	width: 50%;
+}
+
+.compare__item:nth-of-type(2) {
+	background: #212227;
+}
+
+.compare__item .product__title {
+	margin: 1em 0;
+	min-height: 0;
+}
+
+.compare__item .product__price {
+	color: #CECECE;
+}
+
+.compare__item span[class^="product__"] {
+	display: block;
+	padding: 0.85em 0;
+	-webkit-transition: background-color 0.3s;
+	transition: background-color 0.3s;
+}
+
+.compare__item span[class^="product__"].hover {
+	background: #000;
+}
+
+/* three items */
+.compare__item:first-of-type:nth-last-of-type(3),
+.compare__item:first-of-type:nth-last-of-type(3) ~ .compare__item {
+    width: 33.3333%;
+}
+
+.flexbox .compare__item {
+	-webkit-flex: auto;
+	-ms-flex: auto;
+	flex: auto;
+}
+
+.compare__item:nth-child(odd) {
+	-webkit-transform: translate3d(0,-100vh,0);
+	transform: translate3d(0,-100vh,0);
+}
+
+.compare__item:nth-child(even) {
+	-webkit-transform: translate3d(0,100vh,0);
+	transform: translate3d(0,100vh,0);
+}
+
+.view--compare + .compare .compare__item:nth-child(odd),
+.view--compare + .compare .compare__item:nth-child(even) {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.compare__effect {
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	-webkit-transition: -webkit-transform 1s cubic-bezier(0.2, 1, 0.3, 1), opacity 1s cubic-bezier(0.2, 1, 0.3, 1);
+	transition: transform 1s cubic-bezier(0.2, 1, 0.3, 1), opacity 1s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.compare__item:nth-child(odd) .compare__effect {
+	-webkit-transform: translate3d(0,-250px,0);
+	transform: translate3d(0,-250px,0);
+}
+
+.compare__item:nth-child(even) .compare__effect {
+	-webkit-transform: translate3d(0,250px,0);
+	transform: translate3d(0,250px,0);
+}
+
+.view--compare + .compare .compare__item:nth-child(odd) .compare__effect,
+.view--compare + .compare .compare__item:nth-child(even) .compare__effect {
+	opacity: 1;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	-webkit-transition-delay: 0.3s;
+	transition-delay: 0.3s;
+}
+
+@media screen and (min-width: 59.688em) {
+	.flexbox .compare__effect {
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		-webkit-justify-content: space-between;
+		-ms-flex-pack: justify;
+		justify-content: space-between;
+	}
+
+	.flexbox .compare__item .product__image {
+		-webkit-align-self: center;
+		-ms-flex-align: center;
+		align-self: center;
+		-webkit-flex: none;
+		-ms-flex: none;
+		flex: none;
+	}
+}
+
+@media screen and (max-width: 59.688em) {
+	.grid {
+		padding: 2em 0.5em;
+		font-size: 65%;
+	}
+
+	.product {
+		margin: 0 0.5em 1em;
+		min-width: 13em;
+	}
+
+	.product__title {
+		font-size: 115%;
+	}
+
+	.flexbox .product {
+		-webkit-flex: 0 0 13em;
+		-ms-flex: 0 0 13em;
+		flex: 0 0 13em;
+	}
+
+	.flexbox .compare {
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+
+	.no-flexbox .compare__item,
+	.compare__item,
+	.compare__item:first-of-type:nth-last-of-type(3),
+	.compare__item:first-of-type:nth-last-of-type(3) ~ .compare__item {
+		width: 100%;
+	}
+
+	.compare__item {
+		text-align: left;
+		padding: 1.5em;
+		font-size: 90%;
+	}
+
+	.compare__item .product__image {
+		height: 40px;
+		float: left;
+	}
+
+	.compare__item .product__title {
+		margin: 0 40px 0 43px;
+		font-size: 0.85em;
+		display: block;
+	}
+
+	.compare__item .product__year { border-bottom: 2px solid #2E294E; }
+	.compare__item .product__region { border-bottom: 2px solid #6D6FD2; }
+	.compare__item .product__varietal { border-bottom: 2px solid #4B5267; }
+	.compare__item .product__alcohol { border-bottom: 2px solid #3C3474; }
+
+	.action--close {
+		padding: 0.5em 0.75em;
+	}
+
+	.compare__item .action--buy {
+		margin: 0;
+		display: block;
+	}
+
+	.compare__item span[class^="product__"] {
+		display: inline-block;
+		padding: 0.25em;
+		margin: 0 0 0.5em 0;
+		font-size: 0.85em;
+	}
+
+	.compare__item:nth-child(odd) {
+		-webkit-transform: translate3d(-100%,0,0);
+		transform: translate3d(-100%,0,0);
+	}
+
+	.compare__item:nth-child(even) {
+		-webkit-transform: translate3d(100%,0,0);
+		transform: translate3d(100%,0,0);
+	}
+
+	.compare__item:nth-child(odd) .compare__effect {
+		-webkit-transform: translate3d(-250px,0,0);
+		transform: translate3d(-250px,0,0);
+	}
+
+	.compare__item:nth-child(even) .compare__effect {
+		-webkit-transform: translate3d(250px,0,0);
+		transform: translate3d(250px,0,0);
+	}
+}
